@@ -1,6 +1,6 @@
 "use client";
-import InfiniteCarousel from "@/components/InfiniteCarousel";
-import React from "react";
+
+import InfiniteCarousel from "@/components/InfiniteCarousel"
 
 
 
