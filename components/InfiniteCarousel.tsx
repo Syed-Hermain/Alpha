@@ -2,7 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
-export default function InfiniteCarousel({ cars }) {
+type Car = {
+  src: string;
+  alt: string;
+};
+
+export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   // Clone last and first for infinite loop effect
   const extendedCars = [cars[cars.length - 1], ...cars, cars[0]];
 
