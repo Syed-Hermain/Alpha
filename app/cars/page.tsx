@@ -1,13 +1,11 @@
 "use client";
-import CarCarousel from "@/components/CarCarousel";
-import GSAPSlider from "@/components/GSAPSlider";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import React, { useState } from "react";
 
 
 
 export default function SpinnyCarPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
 
   const cars = [
     { src: "cars1.avif", alt: "Car 1" },
