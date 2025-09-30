@@ -1,6 +1,4 @@
-"use client";
-
-import InfiniteCarousel from "@/components/InfiniteCarousel"
+import InfiniteCarousel from "@/components/InfiniteCarousel";
 
 
 
