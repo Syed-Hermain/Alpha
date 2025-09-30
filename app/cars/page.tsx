@@ -25,7 +25,7 @@ export default function SpinnyCarPage() {
 
 
       <div className="mt-10">
-        About the info of this thang. Now let's consider the view of this.
+        About the info of this thang. Now let consider the view of this.
       </div>
     </div>
   );
