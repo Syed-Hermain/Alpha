@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 type Car = {
   src: string;
@@ -13,7 +14,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
 
   const [current, setCurrent] = useState(1); // start at first real slide
   const [isAnimating, setIsAnimating] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const transitionDuration = 500; // ms
 
   // Slide width in % (100% per slide)
@@ -48,11 +49,11 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   // Remove transition to jump instantly
   const removeTransition = () => {
     const container = containerRef.current;
-    container.style.transition = "none";
-    container.style.transform = `translateX(-${slideWidthPercent * current}%)`;
+    //container.style.transition = "none";
+    //container.style.transform = `translateX(-${slideWidthPercent * current}%)`;
     // Force reflow to reset transition
-    container.offsetHeight;
-    container.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+    //container.offsetHeight;
+    //container.style.transition = `transform ${transitionDuration}ms ease-in-out`;
   };
 
   // When current changes and animation allowed, update transform normally
@@ -82,7 +83,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
             className="flex-shrink-0 w-full relative"
             style={{ width: `${slideWidthPercent}%` }}
           >
-            <img
+            <Image
               src={car.src}
               alt={car.alt}
               className="object-cover h-full w-full"
@@ -92,10 +93,12 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
             {(idx === 1 || idx === extendedCars.length - 1) && (
               <button onClick={() => console.log("View 360")} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 justify-center bg-black bg-opacity-70 text-white px-1 rounded flex items-center gap-2">
                 <span>Click to view 360</span>
-                <img
+                <Image
+                width={15}
+                  height={15}
                   src="/three_sixty_view.gif"
                   alt="Loading"
-                  className="w-15 h-15 object-contain"
+                  className="object-contain"
                 />
               </button>
             )}
