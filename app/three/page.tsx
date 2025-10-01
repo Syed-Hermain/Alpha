@@ -1,19 +1,27 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 
 const Car360Viewer = () => {
-  const totalImages = 60;
+  const totalImages = 76;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const dragStartX = useRef(null);
+  const dragStartX = useRef<number | null>(null);
 
-  const onDragStart = (e) => {
-    dragStartX.current = e.clientX || e.touches[0].clientX;
+  const onDragStart = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    dragStartX.current = 'clientX' in e ? e.clientX : e.touches[0].clientX;
   };
 
-  const onDragMove = (e) => {
+  const onDragMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     if (dragStartX.current === null) return;
-    const currentX = e.clientX || e.touches[0].clientX;
+
+    let currentX: number;
+  if ('touches' in e) {
+    currentX = e.touches[0].clientX;
+  } else {
+    currentX = e.clientX;
+  }
+
     const diff = currentX - dragStartX.current;
 
     if (Math.abs(diff) > 10) { // threshold to avoid too sensitive sliding
@@ -41,10 +49,12 @@ const Car360Viewer = () => {
       onMouseLeave={onDragEnd}
       onTouchEnd={onDragEnd}
     >
-      <img
-        src={`car_images/car_${currentIndex + 1}.png`}
+      <Image
+        src={`/car_images/car_${currentIndex + 1}.png`}
         alt={`Car view ${currentIndex + 1}`}
         className="w-full rounded"
+        width={800}
+        height={600}
         draggable={false}
       />
     </div>
