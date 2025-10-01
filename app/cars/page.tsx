@@ -1,7 +1,7 @@
 
 
+import EMICalculator from "@/components/EMICalculator";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
-
 
 
 
@@ -52,7 +52,7 @@ export default function SpinnyCarPage() {
         <div>
           <h1 className="text-black">EMI Calculator</h1>
           <p className="text-black">Calculate your monthly payments easily.</p>
-       
+       <EMICalculator/>
         </div>
       </div>
     </div>

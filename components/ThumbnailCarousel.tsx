@@ -46,10 +46,11 @@ useEffect(() => {
     // Move backward: scroll window to include current slide at start
     setCurrentIndex(Math.max(0, current));
   } else if (current >= currentIndex + slidesToShow) {
-    // Move forward: scroll window to include current slide at end
+    // Move forward: Scroll window to include current slide at end
     setCurrentIndex(Math.min(current - slidesToShow + 1, maxIndex));
   }
 }, [current]);
+
   const handlePrev = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   }
@@ -84,6 +85,7 @@ useEffect(() => {
               draggable={false}
             />
           </div>
+
         ))}
       </div>
 
