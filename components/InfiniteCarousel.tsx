@@ -70,7 +70,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   }, [current, isAnimating]);
 
   return (
-    <>
+    <div>
     <div className="relative w-full aspect-[2/1] overflow-hidden rounded-md bg-gray-100 flex items-center justify-center">
       {/* Slides container */}
       <div
@@ -96,13 +96,14 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
 
             {(idx === 1 || idx === extendedCars.length - 1) && (
               <button onClick={() => console.log("View 360")} className="absolute bottom-20 left-1/2 transform -translate-x-1/2 justify-center bg-gray-500/40 text-white px-2 py-1 rounded flex items-center gap-3">
-                <span>Click to view</span>
+                <span className="text-xs sm:text-sm">Click to view</span>
                 <Image
                   src="/three_sixty_view.gif"
                   alt="Loading"
-                  className="scale-350"
+                  className="md:scale-350"
                   width={15}
                   height={15}
+                  draggable={false}
                 />
               </button>
             )}
@@ -128,7 +129,9 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
         &#9654;
       </button>
     </div>
+    <div className="mt-4">
     <ThumbnailCarousel cars={cars} current={current} setCurrent={setCurrent} />
-    </>
+    </div>
+    </div>
   );
 }

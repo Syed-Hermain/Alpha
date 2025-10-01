@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 
 type Car = {
@@ -18,78 +18,72 @@ type ThumbnailCarouselProps = {
 function ThumbnailCarousel({
     cars,
     current,
-    setCurrent,
-    visibleCount = 5,
+    setCurrent
 }: ThumbnailCarouselProps) {
     // Finite carousel showing multiple thumbnails,
     // current is zero-based index for original cars array
-    const [startIndex, setStartIndex] = useState(0);
-    const total = cars.length;
-
-    // Make sure startIndex keeps the current thumbnail visible
-    useEffect(() => {
-        if (current < startIndex) {
-            setStartIndex(current);
-        } else if (current >= startIndex + visibleCount) {
-            setStartIndex(current - visibleCount + 1);
-        }
-    }, [current, startIndex, visibleCount]);
-
+    const slidesToShow =5;
+    const totalSlides = cars.length;
+    const maxIndex = totalSlides - slidesToShow;
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const slideWidth =220;
+const containerRef = useRef<HTMLDivElement>(null);
     const handlePrev = () => {
-        if (startIndex > 0) setStartIndex(startIndex - 1);
-    };
+        if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+    }
 
-    const handleNext = () => {
-        if (startIndex < total - visibleCount) setStartIndex(startIndex + 1);
-    };
+    const handleNext = () =>{
+        if (currentIndex < maxIndex) setCurrentIndex(currentIndex + 1); 
+    }
 
     return (
-        <div className="flex items-center max-w-3xl mx-auto mt-4 relative">
-            <div className="flex overflow-hidden space-x-2">
-                {cars
-                    .slice(startIndex, startIndex + visibleCount)
-                    .map((car, idx) => {
-                        const realIndex = startIndex + idx;
-                        const isActive = realIndex === current;
-                        return (
-                            <div
-                                key={realIndex}
-                                onClick={() => setCurrent(realIndex)}
-                                className={`cursor-pointer border-1 ${isActive ? "border-black" : "border-transparent"
-                                    } rounded-md overflow-hidden flex-shrink-0 w-100 h-12`}
-                            >
-                                <Image
-                                    src={car.src}
-                                    alt={car.alt}
-                                    width={80}
-                                    height={48}
-                                    objectFit="cover"
-                                    draggable={false}
-                                />
-                            </div>
-                        );
-                    })}
-            </div>
-            <button
-                onClick={handlePrev}
-                disabled={startIndex === 0}
-                className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-2 rounded-full ${startIndex === 0 ? "opacity-40 cursor-not-allowed" : "hover:bg-gray-900"
-                    }`}
-            >
-                &#9664;
-            </button>
-            <button
-                onClick={handleNext}
-                disabled={startIndex >= total - visibleCount}
-                className={`absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-2 rounded-full ${startIndex >= total - visibleCount
-                        ? "opacity-40 cursor-not-allowed"
-                        : "hover:bg-gray-900"
-                    }`}
-            >
-                &#9654;
-            </button>
-        </div>
-    );
+        <div className="w-full mx-auto relative overflow-hidden">
+      {/* Slides container */}
+      <div
+        ref={containerRef}
+        className="flex transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * slideWidth}px)` }}
+      >
+        {cars.map((car, idx) => (
+          <div
+            key={idx}
+            className="flex-shrink-0 w-[200px] mx-2 rounded overflow-hidden"
+            onClick={() => setCurrent(idx+1)}
+          >
+            <Image
+              src={car.src}
+              alt={car.alt}
+              width={200}
+              height={120}
+              className="object-cover w-full h-full"
+              draggable={false}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Prev Button */}
+      <button
+        onClick={handlePrev}
+        disabled={currentIndex === 0}
+        className={`absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-2 rounded-full transition disabled:opacity-30 disabled:cursor-not-allowed`}
+        aria-label="Previous Slide"
+      >
+        &#9664;
+      </button>
+
+      {/* Next Button */}
+      <button
+        onClick={handleNext}
+        disabled={currentIndex === maxIndex}
+        className={`absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-2 rounded-full transition disabled:opacity-30 disabled:cursor-not-allowed`}
+        aria-label="Next Slide"
+      >
+        &#9654;
+      </button>
+    </div>
+    )
+
 }
 
 export default ThumbnailCarousel;

@@ -24,16 +24,28 @@ export default function SpinnyCarPage() {
     { src: "/cars14.avif", alt: "Car 14" },
     { src: "/cars15.avif", alt: "Car 15" },
     { src: "/cars16.avif", alt: "Car 16" },
-    { src: "/cars17.avif", alt: "Car 17" }
+    { src: "/cars17.avif", alt: "Car 17" },
+    { src: "/cars18.avif", alt: "Car 18" },
+    { src: "/cars19.avif", alt: "Car 19" },
+    { src: "/cars20.avif", alt: "Car 20" },
+    { src: "/cars21.avif", alt: "Car 21" },
+    { src: "/cars22.avif", alt: "Car 22" },
+    { src: "/cars23.avif", alt: "Car 23" },
+    { src: "/cars24.avif", alt: "Car 24" },
+    { src: "/cars25.avif", alt: "Car 25" },
+    { src: "/cars26.avif", alt: "Car 26" },
+    { src: "/cars27.avif", alt: "Car 27" },
+    { src: "/cars28.avif", alt: "Car 28" },
+    { src: "/cars29.avif", alt: "Car 29" },
   ];
 
 
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white">
       <h1 className="text-3xl font-bold mb-6">GSAP Car Image Carousel</h1>
-
+        <div className="">
       <InfiniteCarousel cars={cars} />
-
+</div>
 
 
       <div className="mt-10">
