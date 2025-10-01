@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import ThumbnailCarousel from "./ThumbnailCarousel";
 
 type Car = {
   src: string;
@@ -69,36 +70,39 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   }, [current, isAnimating]);
 
   return (
-    <div className="relative overflow-hidden max-w-3xl mx-auto">
+    <>
+    <div className="relative w-full aspect-[2/1] overflow-hidden rounded-md bg-gray-100 flex items-center justify-center">
       {/* Slides container */}
       <div
         className="flex"
-        style={{ width: `${extendedCars.length * 10}%` }}
+        style={{ width: `${extendedCars.length * 100}%` }}
         ref={containerRef}
         onTransitionEnd={handleTransitionEnd}
       >
         {extendedCars.map((car, idx) => (
           <div
             key={idx}
-            className="flex-shrink-0 w-full relative"
+            className="relative flex-shrink-0 w-full h-full"
             style={{ width: `${slideWidthPercent}%` }}
           >
             <Image
               src={car.src}
               alt={car.alt}
-              className="object-cover h-full w-full"
+              width={800}
+              height={400}
+              className="object-contain w-full h-full"
               draggable={false}
             />
 
             {(idx === 1 || idx === extendedCars.length - 1) && (
-              <button onClick={() => console.log("View 360")} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 justify-center bg-black bg-opacity-70 text-white px-1 rounded flex items-center gap-2">
-                <span>Click to view 360</span>
+              <button onClick={() => console.log("View 360")} className="absolute bottom-20 left-1/2 transform -translate-x-1/2 justify-center bg-gray-500/40 text-white px-2 py-1 rounded flex items-center gap-3">
+                <span>Click to view</span>
                 <Image
-                width={15}
-                  height={15}
                   src="/three_sixty_view.gif"
                   alt="Loading"
-                  className="object-contain"
+                  className="scale-350"
+                  width={15}
+                  height={15}
                 />
               </button>
             )}
@@ -124,5 +128,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
         &#9654;
       </button>
     </div>
+    <ThumbnailCarousel cars={cars} current={current} setCurrent={setCurrent} />
+    </>
   );
 }
