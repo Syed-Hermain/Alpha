@@ -1,11 +1,12 @@
 
 
 import InfiniteCarousel from "@/components/InfiniteCarousel";
+import Zara from "@/components/zara";
 
 
 
 export default function SpinnyCarPage() {
-  
+
 
   const cars = [
     { src: "/cars1.avif", alt: "Car 1" },
@@ -41,15 +42,18 @@ export default function SpinnyCarPage() {
 
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white">
-      <h1 className="text-3xl font-bold mb-6">GSAP Car Image Carousel</h1>
-        <div className="">
-      <InfiniteCarousel cars={cars} />
-</div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="mt-4">
+        <div className="py-8">
+          <InfiniteCarousel cars={cars} />
 
+        </div>
 
-      <div className="mt-10">
-        About the info of this thang. Now let consider the view of this.
+        <div>
+          <h1 className="text-black">EMI Calculator</h1>
+          <p className="text-black">Calculate your monthly payments easily.</p>
+        <Zara cars={cars} />
+        </div>
       </div>
     </div>
   );
