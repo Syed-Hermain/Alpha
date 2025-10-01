@@ -46,13 +46,13 @@ export default function SpinnyCarPage() {
       <div className="mt-4">
         <div className="py-8">
           <InfiniteCarousel cars={cars} />
-          <h1>₹14,25,000</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">₹14,25,000</h1>
         </div>
 
         <div>
           <h1 className="text-black">EMI Calculator</h1>
           <p className="text-black">Calculate your monthly payments easily.</p>
-       <EMICalculator/>
+          <EMICalculator />
         </div>
       </div>
     </div>
