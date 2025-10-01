@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ThumbnailCarousel from "./ThumbnailCarousel";
+import Car360Viewer from "@/app/three/page";
 
 type Car = {
   src: string;
@@ -17,6 +18,19 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const transitionDuration = 500; // ms
+  const [showOverlay, setShowOverlay] = React.useState(false);
+
+
+  const [closing, setClosing] = useState(false);
+
+  const handleClose = () => {
+    setClosing(true);
+    setTimeout(() => {
+      setShowOverlay(false);
+      setClosing(false);
+    }, 400); // match animation duration
+  };
+
 
   // Slide width in % (100% per slide)
   const slideWidthPercent = 100;
@@ -70,6 +84,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
   }, [current, isAnimating]);
 
   return (
+    <>
     <div>
     <div className="relative w-full aspect-[2/1] overflow-hidden rounded-md bg-gray-100 flex items-center justify-center">
       {/* Slides container */}
@@ -95,7 +110,7 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
             />
 
             {(idx === 1 || idx === extendedCars.length - 1) && (
-              <button onClick={() => console.log("View 360")} className="absolute bottom-20 left-1/2 transform -translate-x-1/2 justify-center bg-gray-500/40 text-white px-2 py-1 rounded flex items-center gap-3">
+              <button onClick={() => setShowOverlay(true)} className="absolute bottom-20 left-1/2 transform -translate-x-1/2 justify-center bg-gray-500/40 text-white px-2 py-1 rounded flex items-center gap-3">
                 <span className="text-xs sm:text-sm">Click to view</span>
                 <Image
                   src="/three_sixty_view.gif"
@@ -133,5 +148,33 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
     <ThumbnailCarousel cars={cars} current={current} setCurrent={setCurrent} />
     </div>
     </div>
+
+    { showOverlay && (
+      <div
+          className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex justify-center items-center`}
+        >
+          <div
+            className={`bg-white rounded-lg shadow-lg w-4/5 max-w-xl h-3/4 relative overflow-hidden ${
+              closing ? "slide-up" : "slide-down"
+            }`}
+            style={{ animationFillMode: "forwards" }}
+          >
+            {/* Close button top-left */}
+            <button
+              onClick={handleClose}
+              className="absolute top-4 left-4 text-black p-2 rounded-full hover:bg-gray-200 transition"
+              aria-label="Close overlay"
+            >
+              &#8592; {/* left arrow */}
+            </button>
+
+            {/* Centered content */}
+            <div className="h-full flex justify-center items-center">
+              <Car360Viewer />
+            </div>
+          </div>
+        </div>
+    )}
+    </>
   );
 }

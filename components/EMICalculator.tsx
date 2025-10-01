@@ -109,10 +109,12 @@ export default function EMICalculatorChartJS() {
         </div>
         <div className="w-64 h-40 relative">
           <canvas ref={chartRef}></canvas>
-          <div className="absolute bottom-2 w-full text-center font-semibold text-gray-800 text-lg">
+          
+        </div>
+
+        <div className="mt-5 bottom-5 w-full text-center font-semibold text-gray-800 text-lg">
             Total Amount Payable: {formatCurrency(Math.round(totalPayable))}
           </div>
-        </div>
       </div>
 
       {/* Right: Controls */}
