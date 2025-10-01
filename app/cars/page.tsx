@@ -1,7 +1,7 @@
 
 
 import InfiniteCarousel from "@/components/InfiniteCarousel";
-import Zara from "@/components/zara";
+
 
 
 
@@ -52,7 +52,7 @@ export default function SpinnyCarPage() {
         <div>
           <h1 className="text-black">EMI Calculator</h1>
           <p className="text-black">Calculate your monthly payments easily.</p>
-        <Zara cars={cars} />
+       
         </div>
       </div>
     </div>
