@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ThumbnailCarousel from "./ThumbnailCarousel";
-import Car360Viewer from "@/app/three/page";
+import Car360Viewer from "./Car360Viewer";
 
 type Car = {
   src: string;

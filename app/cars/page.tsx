@@ -46,7 +46,7 @@ export default function SpinnyCarPage() {
       <div className="mt-4">
         <div className="py-8">
           <InfiniteCarousel cars={cars} />
-
+          <h1>₹14,25,000</h1>
         </div>
 
         <div>
