@@ -91,7 +91,7 @@ function ThumbnailCarousel({ cars, current, setCurrent }: ThumbnailCarouselProps
             key={idx}
             className={`flex-shrink-0 w-[227px] mx-2 rounded overflow-hidden aspect-[2/1] ${idx === normalizedCurrent ? "border-4 border-black" : "border border-transparent"
               }`}
-            onClick={() => setCurrent(idx)}
+            onClick={() => setCurrent(idx+1)}
           >
             <Image
               src={car.src}
