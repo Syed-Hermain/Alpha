@@ -85,8 +85,8 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
 
   return (
     <>
-    <div>
-    <div className="relative w-full aspect-[2/1] overflow-hidden rounded-md bg-gray-100 flex items-center justify-center">
+    <div className="w-[800px] h-[400px]">
+    <div className="relative overflow-hidden rounded-md bg-gray-100 flex items-center">
       {/* Slides container */}
       <div
         className="flex"

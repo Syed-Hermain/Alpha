@@ -2,11 +2,11 @@
 
 import EMICalculator from "@/components/EMICalculator";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
-
-
+import Navbar from "@/components/Navbar";
+import SpinnyCarCard from "@/components/SpinnyCarCard";
 
 export default function SpinnyCarPage() {
-
+ 
 
   const cars = [
     { src: "/cars1.avif", alt: "Car 1" },
@@ -42,11 +42,20 @@ export default function SpinnyCarPage() {
 
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="mt-4">
-        <div className="py-8">
-          <InfiniteCarousel cars={cars} />
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">₹14,25,000</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8 bg-white">
+      <div className="">
+        <Navbar />
+        <div className="flex flex-row">
+          <div className="">
+           <InfiniteCarousel cars={cars} />
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+              ₹14,25,000
+            </h1>
+          </div>
+          
+          <div>
+            <SpinnyCarCard />
+          </div>
         </div>
 
         <div>
