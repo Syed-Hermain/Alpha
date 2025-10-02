@@ -28,11 +28,11 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
     setTimeout(() => {
       setShowOverlay(false);
       setClosing(false);
-    }, 400); // match animation duration
+    }, 400); 
   };
 
 
-  // Slide width in % (100% per slide)
+  
   const slideWidthPercent = 100;
 
   const handlePrev = () => {
@@ -53,22 +53,12 @@ export default function InfiniteCarousel({ cars }: { cars: Car[] }) {
     if (current === 0) {
       // Jump to last real slide
       setCurrent(extendedCars.length - 2);
-      removeTransition();
+      
     } else if (current === extendedCars.length - 1) {
       // Jump to first real slide
       setCurrent(1);
-      removeTransition();
+      
     }
-  };
-
-  // Remove transition to jump instantly
-  const removeTransition = () => {
-    const container = containerRef.current;
-    //container.style.transition = "none";
-    //container.style.transform = `translateX(-${slideWidthPercent * current}%)`;
-    // Force reflow to reset transition
-    //container.offsetHeight;
-    //container.style.transition = `transform ${transitionDuration}ms ease-in-out`;
   };
 
   // When current changes and animation allowed, update transform normally

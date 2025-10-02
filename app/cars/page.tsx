@@ -48,9 +48,7 @@ export default function SpinnyCarPage() {
         <div className="flex flex-row gap-2">
           <div className="">
            <InfiniteCarousel cars={cars} />
-            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-              ₹14,25,000
-            </h1>
+            
           </div>
           
           <div>
