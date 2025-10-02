@@ -57,8 +57,7 @@ export default function SpinnyCarPage() {
         </div>
 
         <div className="mt-30">
-          <h1 className="text-black">EMI Calculator</h1>
-          <p className="text-black">Calculate your monthly payments easily.</p>
+          <h1 className="text-purple-600 text-4xl font-bold mb-4 ml-25">EMI Calculator</h1>
           <EMICalculator />
         </div>
       </div>
