@@ -17,7 +17,7 @@ function ThumbnailCarousel({ cars, current, setCurrent }: ThumbnailCarouselProps
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(1);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   const baseSlideWidth = 243; // 227px slide width + ~16px margin (mx-2 is 8px each side)
 
@@ -38,23 +38,30 @@ function ThumbnailCarousel({ cars, current, setCurrent }: ThumbnailCarouselProps
   }, []);
 
   const maxIndex = Math.max(0, cars.length - slidesToShow);
-
+  const normalizedCurrent = (current - 1 + cars.length) % cars.length;
   // Keep currentIndex in sync with selected slide ensuring it stays visible
+  
+  
   useEffect(() => {
     let newIndex = currentIndex;
 
-    if (current < currentIndex) {
-      newIndex = current;
-    } else if (current >= currentIndex + slidesToShow) {
-      newIndex = current - slidesToShow + 1;
+    // If normalizedCurrent is before the start of visible window, scroll left
+    if (normalizedCurrent < currentIndex) {
+      newIndex = normalizedCurrent;
+    }
+    // If normalizedCurrent goes beyond the last visible slot, scroll so current is last visible
+    else if (normalizedCurrent >= currentIndex + slidesToShow) {
+      newIndex = normalizedCurrent - slidesToShow + 1;
     }
 
+    // Clamp newIndex within valid range
     newIndex = Math.max(0, Math.min(newIndex, maxIndex));
 
     if (newIndex !== currentIndex) {
       setCurrentIndex(newIndex);
     }
-  }, [current]);
+  }, [normalizedCurrent]);
+
 
   const translateX = currentIndex * baseSlideWidth;
 
@@ -78,12 +85,12 @@ function ThumbnailCarousel({ cars, current, setCurrent }: ThumbnailCarouselProps
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${translateX}px)` }}
       >
+
         {cars.map((car, idx) => (
           <div
             key={idx}
-            className={`flex-shrink-0 w-[227px] mx-2 rounded overflow-hidden aspect-[2/1] ${
-              idx === current ? "border-4 border-black" : "border border-transparent"
-            }`}
+            className={`flex-shrink-0 w-[227px] mx-2 rounded overflow-hidden aspect-[2/1] ${idx === normalizedCurrent ? "border-4 border-black" : "border border-transparent"
+              }`}
             onClick={() => setCurrent(idx)}
           >
             <Image
