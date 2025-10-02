@@ -71,7 +71,7 @@ function ThumbnailCarousel({ cars, current, setCurrent }: ThumbnailCarouselProps
     <div
       ref={containerRef}
       className="relative overflow-hidden w-full max-w-[800px] mx-auto"
-      style={{ height: "140px" }} // Adjust height based on image aspect ratio
+      style={{ height: "120px" }} // Adjust height based on image aspect ratio
     >
       {/* Slides container */}
       <div

@@ -45,7 +45,7 @@ export default function SpinnyCarPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8 bg-white">
       <div className="">
         <Navbar />
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-2">
           <div className="">
            <InfiniteCarousel cars={cars} />
             <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
@@ -58,7 +58,7 @@ export default function SpinnyCarPage() {
           </div>
         </div>
 
-        <div>
+        <div className="mt-30">
           <h1 className="text-black">EMI Calculator</h1>
           <p className="text-black">Calculate your monthly payments easily.</p>
           <EMICalculator />
